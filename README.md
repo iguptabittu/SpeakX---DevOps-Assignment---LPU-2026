@@ -4,7 +4,7 @@ This repository demonstrates the deployment of a mobile application backend in t
 This is a endpoint link(Note: It will not work without api key) *https://www.numberpropertyapi.site/number-info?number=3*
 
 Use this code in terminal to access this API APP    
-**curl -H "X-API-KEY: d5b7f6e9-ff8a-4d93-bc6b-bd6fcf3e55bb" "https://www.numberpropertyapi.site/number-info?number=3"**
+```curl -H "X-API-KEY: d5b7f6e9-ff8a-4d93-bc6b-bd6fcf3e55bb" "https://www.numberpropertyapi.site/number-info?number=3"```
 
 One of the valid API key is *d5b7f6e9-ff8a-4d93-bc6b-bd6fcf3e55bb*
 
