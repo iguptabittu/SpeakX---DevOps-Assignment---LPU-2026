@@ -18,11 +18,9 @@ jobs:
       CONTAINER_NAME: "backend-container"
 
     steps:
-    # 1. Checkout code
     - name: Checkout Code
       uses: actions/checkout@v3
 
-    # 2. Set up AWS credentials
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v3
       with:
@@ -30,23 +28,19 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ env.AWS_REGION }}
 
-    # 3. Log in to Amazon ECR
     - name: Log in to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
 
-    # 4. Build and tag Docker image
     - name: Build and Tag Docker Image
       run: |
         docker build -t $ECR_REPO_NAME:latest .
         docker tag $ECR_REPO_NAME:latest ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPO_NAME }}:latest
 
-    # 5. Push Docker image to ECR
     - name: Push Docker Image to ECR
       run: |
         docker push ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPO_NAME }}:latest
 
-    # 6. Update ECS Service with New Image
     - name: Deploy to ECS
       run: |
         aws ecs update-service \
